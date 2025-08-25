@@ -44,7 +44,7 @@ def get_openrouter_response(prompt: str) -> str:
     }
     # Define the JSON payload for the request, including the AI model and the user's prompt.
     data = {
-        "model": "tngtech/deepseek-r1t2-chimera:free",
+        "model": "tngtech/deepseek-r1t2-chimera:free", #Here you can replace the AI model you want to user
         "messages": [
             {"role": "user", "content": prompt}
         ]
