@@ -1,9 +1,3 @@
-It seems like you provided a README for a Discord chatbot, but it's a bit of a mix of languages and formatting. It also looks like you want to update it with some new information, like using a `config.py` file and cloning a GitHub repository.
-
-Here is a new version of the README, completely in English, with the requested changes.
-
------
-
 ### Discord-Chatbot
 
 This is a Discord chatbot that can be easily deployed on your server. You'll need a free Discord developer account, a free OpenRouter account, and a server to host it on, like a free tier instance from Oracle Cloud.
