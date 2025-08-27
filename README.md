@@ -1,6 +1,6 @@
 ### Discord AI Chatbot
 
-This is a Discord chatbot that can be easily deployed on your server. It connects to various AI models via the OpenRouter API. All you need is a free Discord developer account, a free OpenRouter account, and a server to host it on, like a free tier instance from Oracle Cloud. 
+This is a Discord chatbot that can be easily deployed on your server or run locally on your PC. It connects to various AI models via the OpenRouter API. All you need is a free Discord developer account, a free OpenRouter account, and either a server to host it on or a local machine to run it from.
 
 This guide will walk you through the entire setup process.
 
@@ -41,20 +41,30 @@ OpenRouter gives you access to multiple AI models through a single API. This is 
 
 -----
 
-### Step 4: Deploy the Bot
+### Step 4: Deployment
 
-To ensure your bot is online 24/7, you can deploy it on a server. This guide uses an Oracle Cloud free tier instance, which is perfect for this.
+You can either deploy the bot on a server or run it on your own PC.
 
-1.  Connect to your server via **SSH**.
+#### Option A: Deploying to a Server (Oracle Cloud)
 
-2.  Clone the repository using `git clone`:
+To ensure your bot is online 24/7, you can deploy it on a server. The Oracle Cloud Free Tier provides a great option for this.
+
+1.  **Create a Free Tier Instance**:
+    If you don't have one, log in to your Oracle Cloud account and create a new **"Compute Instance"** under the **"Always Free"** options.
+
+2.  **Connect via SSH**:
+    Once your instance is running, find its public IP address and connect to it using SSH.
+
+3.  **Clone the Repository**:
+    Run the following commands in your terminal to get the bot's code:
 
     ```bash
     git clone https://github.com/felixld/Discord-Chatbot.git
     cd Discord-Chatbot
     ```
 
-3.  Create a `config.py` file to store your sensitive API keys. **Do not add this file to your GitHub repository\!**
+4.  **Create the `config.py` File**:
+    Create a `config.py` file to store your sensitive API keys. **Do not add this file to your GitHub repository\!**
 
     ```python
     # config.py
@@ -66,7 +76,8 @@ To ensure your bot is online 24/7, you can deploy it on a server. This guide use
     OPENROUTER_API_KEY = "your_openrouter_api_key_here"
     ```
 
-4.  Open the `main.py` file and find the line(47) that defines the AI model. It will look like this:
+5.  **Configure the AI Model**:
+    Open the `main.py` file and find the line that defines the AI model. It will look similar to this:
 
     ```python
     # ... other code ...
@@ -82,17 +93,54 @@ To ensure your bot is online 24/7, you can deploy it on a server. This guide use
     # ... rest of the code ...
     ```
 
-5.  Install the required Python libraries:
+6.  **Install Dependencies and Run**:
+    Install the required libraries and then run the bot using `screen` to keep it online in the background.
+
+    ```bash
+    pip install -r requirements.txt
+    sudo apt-get install screen  # Install screen for background operation
+    screen -S discord-bot
+    python main.py
+    # To detach, press Ctrl + A, then D
+    ```
+
+#### Option B: Installing on Your Local PC
+
+You can also run the bot directly on your computer. This is great for testing or a bot you don't need to have online all the time.
+
+1.  **Install Python (if needed)**:
+
+      * **macOS**: You can use `brew`: `brew install python`
+      * **Windows**: Download the installer from the **[Python website](https://www.python.org/downloads/windows/)**. Make sure to check the box that says **"Add Python to PATH"** during installation.
+      * **Ubuntu / Debian**: Use `apt`: `sudo apt update && sudo apt install python3 python3-pip`
+      * **Arch / Manjaro**: Use `pacman`: `sudo pacman -S python`
+
+2.  **Clone the Repository**:
+    Open your terminal or command prompt and clone the repository:
+
+    ```bash
+    git clone https://github.com/felixld/Discord-Chatbot.git
+    cd Discord-Chatbot
+    ```
+
+3.  **Create the `config.py` File**:
+    Create a `config.py` file as described in the server deployment section and paste your Discord bot token and OpenRouter API key into it.
+
+4.  **Configure the AI Model**:
+    Open `main.py` and replace the model identifier string with your chosen model from OpenRouter, as described above.
+
+5.  **Install Dependencies**:
+    Install the required libraries with `pip`:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-6.  To run the bot in the background, use `screen`. This keeps the bot running even after you close your SSH session.
+6.  **Run the Bot**:
+    Finally, run the bot from your terminal:
 
-      * Install `screen`: `sudo apt-get install screen`
-      * Start a new session: `screen -S discord-bot`
-      * Run your bot: `python main.py`
-      * Detach from the session by pressing **`Ctrl + A`**, then **`D`**.
+    ```bash
+    python main.py
+    ```
 
 Your bot is now live and ready to go\! If you have any questions or need to troubleshoot, feel free to open an issue on GitHub.
